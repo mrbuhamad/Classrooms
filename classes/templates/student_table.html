@@ -1,0 +1,28 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Exam grade</th>
+      {% if request.user.is_authenticated %} 
+      <th scope="col">Update</th>
+      <th scope="col">Delete</th>
+      {% endif %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for x in student %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{x.name}}</td>
+      <td>{{x.exam_grade}}</td>
+      {% if request.user.is_authenticated %} 
+      <td><a href="{% url 'student-update' x.id %}" class="btn" style="background-color: #000034; color: white;">Update</a>
+      </td>
+      <td><a href="{% url 'student-delete' x.id %}" class="btn" style="background-color: #FFA500; color: #000034;">Delete</a>
+      </td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
